@@ -1,18 +1,34 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ScrollView, FlatList } from 'react-native';
 import Titulo from '../Titulo';
 import ItemLista from '../ItemLista';
 import estilo from './estilo.js';
+import api from '../../services/api';
 
 export default function Tabela() {
 
-  
+  const [tabelaJogos, setTabelaJogos] = useState([])
+
+  useEffect(() => {
+    var tabela = api.listarJogos();
+    setTabelaJogos(tabela);
+    console.log('AQUI------------------------------------------------------')
+    console.log(tabelaJogos)
+  }, [])
 
   return (
     <View>
       <Titulo />
 
-      <ScrollView style={estilo.lista}>
+
+    <FlatList data={tabelaJogos}
+            renderItem={(item)=> {
+              <ItemLista data={item} placar="1" paises={item.data.time1} />
+            }}
+        keyExtractor={()=> item.codigo}
+     />
+
+      {/* <ScrollView style={estilo.lista}>
         <ItemLista placar="2 x 2" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="JAPAO" />
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="MEXICO"/>
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="SENEGAL"/>
@@ -25,7 +41,7 @@ export default function Tabela() {
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="TUNISIA"/>
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="URUGUAI"/>
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="BRASIL"/>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   )
 }

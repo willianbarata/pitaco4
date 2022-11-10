@@ -52,6 +52,7 @@ export default function ItemLista(props) {
       <Text style={estilo.paises}>
           {props.paises}
       </Text>
+      <Text style={estilo.corEnvioPitaco}> Você ainda não enviou seu pitaco! </Text>
     </View>
   )
 }

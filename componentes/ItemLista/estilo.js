@@ -32,7 +32,14 @@ const estilo = StyleSheet.create({
   },
   blocoPlacar:{
     flexDirection: 'row',
+  },
+  corEnvioPitaco:{
+    color: '#f12128',
+    marginLeft: '5%',
+    fontWeight: 'bold',
+    fontSize: 12
   }
+
 });
 
 export default estilo;

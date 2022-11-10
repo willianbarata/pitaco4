@@ -17,6 +17,7 @@ export default () => {
         if(email && password){
             let result = api.login(email, password)
             navigation.navigate('Teste')
+            
         }
         else{
             alert("Favor informar e-mail e senha!")

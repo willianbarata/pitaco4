@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
 
 
 import USA from './../../assets/bandeiras/USA_128x128.png';
@@ -38,15 +38,54 @@ import URUGUAI    from './../../assets/bandeiras/Uruguai_128x128.png';
  
 export default function Aposta(props) {
   
-
-  const apostando = () =>{
+  const [textCasa, onChangeTextCasa] = React.useState("1");
+  const [textFora, onChangeTextFora] = React.useState("1");
+  
+  const apostando = (props) =>{
     console.log("Apostando")
+    props.finalizar
   }
+
 
   return (
     <View>
         <Text> Tela de Aposta</Text>
         
+        <View style={estilo.grupoInputs}>
+            <TextInput
+            style={estilo.inputCasa}
+            onChangeText={onChangeTextCasa}
+            value={textCasa}
+          />
+           <TextInput 
+            style={estilo.inputFora}
+            onChangeText={onChangeTextFora}
+            value={textFora}
+          />
+        </View>
+
+        <Button title='sair' onPress={apostando} />
     </View>
   )
 }
+
+const estilo = StyleSheet.create({
+  inputCasa:{
+    width: 90,
+    height: 60,
+    borderWidth: 1,
+    borderColor: "#000"
+  },
+  inputFora:{
+    width: 90,
+    height: 60,
+    borderWidth: 1,
+    borderColor: "#000",
+    marginLeft: 30
+  },
+  grupoInputs:{
+    marginTop: 70,
+    marginLeft: 40,
+    flexDirection: 'row'
+  }
+ });

@@ -39,9 +39,6 @@ import TUNISIA    from './../../assets/bandeiras/Tunisia_128x128.png';
 import URUGUAI    from './../../assets/bandeiras/Uruguai_128x128.png';
  
 export default function ItemListaPitaco(props) {
-  
-  
-
   return (
     
       <View style={estilo.box}>
