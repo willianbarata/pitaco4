@@ -43,6 +43,15 @@ const a = async (xml) => {
         });
         const res = await response;
         console.log(JSON.stringify(res.bodyUsed));
+        console.log(res.blob);
+        console.log(res.body);
+        console.log(res.status);
+        console.log(res.response);
+        console.log(res.xml);
+        console.log( JSON.stringify(res.xml));
+        console.log(res.type);
+        console.log(res.type.valueOf("Usuario"));
+  
     } catch (error) {
         console.error(error);
     } finally {

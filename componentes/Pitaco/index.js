@@ -1,19 +1,37 @@
-import React from 'react';
-import { View, ScrollView } from 'react-native';
+import React, {useState} from 'react';
+import { View, ScrollView, Modal, TouchableOpacity } from 'react-native';
 import Titulo from '../Titulo';
 import ItemLista from '../ItemLista';
-import estilo from './estilo.js';
+import Aposta from '../Aposta';
 
-export default function Tabela() {
+import estilo from './estilo';
 
-  
+export default function Pitaco() {
 
+const [ visivel, setVisivel ] = useState(false);
+
+  const abreAposta = () =>{
+    console.log("Abre Aposta")
+    setVisivel(true)
+  }
   return (
     <View>
       <Titulo />
 
       <ScrollView style={estilo.lista}>
+      <TouchableOpacity onPress={abreAposta}>
         <ItemLista placar="2 x 2" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="JAPAO" />
+        </TouchableOpacity>
+       
+        <Modal animationType='slide' transparent={true} visible={visivel} onRequestClose={()=>{}}>
+              <View style={estilo.modalWindow}>
+                <View style={estilo.modalBody}>
+
+                  <Aposta />
+                  </View>
+              </View>
+        </Modal>
+
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="MEXICO"/>
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="SENEGAL"/>
         <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="PORTUGAL"/>
