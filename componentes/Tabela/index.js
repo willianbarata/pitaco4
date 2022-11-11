@@ -10,10 +10,14 @@ export default function Tabela() {
   const [tabelaJogos, setTabelaJogos] = useState([])
 
   useEffect(() => {
-    var tabela = api.listarJogos();
-    setTabelaJogos(tabela);
+
+
+    var tabela = api.listarjogos(); // get the string from the response
+    var utiliza = JSON.parse(tabela); // convert it to an 
     console.log('AQUI------------------------------------------------------')
-    console.log(tabelaJogos)
+
+    console.log(tabela)
+    console.log(utiliza)
   }, [])
 
   return (
@@ -23,9 +27,9 @@ export default function Tabela() {
 
     <FlatList data={tabelaJogos}
             renderItem={(item)=> {
-              <ItemLista data={item} placar="1" paises={item.data.time1} />
+              <ItemLista data={item} placar="1" paises="888888" />
             }}
-        keyExtractor={()=> item.codigo}
+        keyExtractor={(item)=> item.codigo}
      />
 
       {/* <ScrollView style={estilo.lista}>

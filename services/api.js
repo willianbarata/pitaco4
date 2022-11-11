@@ -90,7 +90,7 @@ export default {
         
     },
 
-    listarPalpite: (email, password) => {
+    listapalpite: (email, password) => {
         let xmls='<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
         '<Body>' +
         '<ListarPalpitesRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
@@ -108,7 +108,7 @@ export default {
         
     },
 
-    listarEstatistica: (email, password) => {
+    listarestatistica: (email, password) => {
         let xmls=
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
         '<Body>' +
@@ -132,7 +132,7 @@ export default {
     },
 
 
-    listarJogos: (email, password) => {
+    listarjogos: (email, password) => {
         let xmls=
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
         '<Body>' +
@@ -145,9 +145,53 @@ export default {
             var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
 
             JSON.stringify(jsongp)
-            console.log(jsongp); //TODO: listados todos os jogos,  falta ordenar na tela
+         //   console.log(jsongp); //TODO: listados todos os jogos,  falta ordenar na tela
 
             
+        });
+        
+    },
+
+    listarclassificacao: (email, password) => {
+        let xmls=
+        '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
+        '<Body>' +
+        '<ListarClassificacaoRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
+        '</Body>' +
+        '</Envelope>'
+
+        post(xmls).then(function (resp) {
+            var json = xml2json(resp);
+
+            var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarClassificacaoRS"]["Posicoes"]["Posicao"];
+
+            JSON.stringify(jsongp)
+            console.log(jsongp); 
+
+        });
+        
+    },
+
+    palpitarjogo: (email, password) => { //erro 500
+        let xmls=
+            '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
+            '<Body>' +
+            '<PalpitarJogoRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678">' +
+            '<CodigoJogo xmlns="">382</CodigoJogo>' +
+            '<GolsTime1 xmlns="">2</GolsTime1>' +
+            '<GolsTime2 xmlns="">2</GolsTime2>' +
+            '</PalpitarJogoRQ>' +
+            '</Body>' +
+            '</Envelope>' +
+
+        post(xmls).then(function (resp) {
+            var json = xml2json(resp);
+
+            //var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
+
+            //JSON.stringify(jsongp)
+            console.log(jsongp); 
+
         });
         
     },
