@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
   box:{
-    padding: 10,
-    marginBottom: 10,
+    padding: '5%',
+    marginBottom: '1%',
     borderBottomColor: 1,
     alignItems: 'center'
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { View, Text,StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,9 +11,29 @@ import InformacoesScreen from '../InformacoesScreen';
 import PitacosScreen from '../PitacosScreen';
 import TabelaScreen from '../TabelaScreen';
 
+import api from "../../services/api";
 
 const Tab = createBottomTabNavigator();
 export default () => {
+
+/*   const [valor, setValor] = useState({})
+
+  useEffect(() => {
+      const getBarberInfo = async () => {
+          var lista = "";
+        var res = await api.listarjogos(lista);
+        
+        console.log(res);
+          //setValor(res);
+
+          //imprimir();
+      }
+      getBarberInfo();
+      
+    }, []);
+
+
+     */
 
     return(
         <NavigationContainer independent={true}>

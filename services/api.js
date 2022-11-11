@@ -43,7 +43,7 @@ const post = async (param) => {
                     return res;
                 })
                 .catch(function (error) {
-                    console.log(error);
+                   // console.log(error);
                 });
     const y = await x;
     return y.data;
@@ -84,7 +84,7 @@ export default {
                 Equipe: jsonusu['Equipe'],
             }
 
-            console.log(InfoUsuario, InfoGrupo);
+            //console.log(InfoUsuario, InfoGrupo);
             
         });
         
@@ -102,7 +102,7 @@ export default {
 
             let jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarPalpitesRS"]["PalpitesJogos"]["Jogo"];
             JSON.stringify(jsongp)
-            console.log(jsongp); //TODO: listados todos os palpites, falta ordenar na tela
+            //console.log(jsongp); //TODO: listados todos os palpites, falta ordenar na tela
             
         });
         
@@ -118,13 +118,13 @@ export default {
         '</Body>' +
         '</Envelope>';
         
-        console.log(xmls)
+        //console.log(xmls)
         post(xmls).then(function (resp) {
             var json = xml2json(resp);
 
             var jsongp = json["S:Envelope"]["S:Body"]["ns2:ObterEstatisticasJogoRS"]["Estatisticas"]["Estatistica"];
             JSON.stringify(jsongp)
-            console.log(jsongp); //TODO: listados todas estatisticas falta ordenar na tela
+          //  console.log(jsongp); //TODO: listados todas estatisticas falta ordenar na tela
 
             
         });
@@ -132,24 +132,24 @@ export default {
     },
 
 
-    listarjogos: (email, password) => {
+    listarjogos: (lista) => {
         let xmls=
         '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
         '<Body>' +
         '<ListarJogosRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678" />' +
         '</Body>' +
         '</Envelope>';
-        post(xmls).then(function (resp) {
-            var json = xml2json(resp);
-
-            var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
-
-            JSON.stringify(jsongp)
-         //   console.log(jsongp); //TODO: listados todos os jogos,  falta ordenar na tela
-
-            
+       return post(xmls).then( (resp) =>{
+            return new Promise((resolve, reject) => {
+                var json = xml2json(resp);    
+                jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"]
+                jsongp = JSON.stringify(jsongp)
+              //  lista = resolve["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
+                resolve(jsongp)
+                
+                return jsongp;
+            });
         });
-        
     },
 
     listarclassificacao: (email, password) => {
@@ -167,7 +167,7 @@ export default {
 
             JSON.stringify(jsongp)
             console.log(jsongp); 
-
+            return jsongp;
         });
         
     },
@@ -190,7 +190,7 @@ export default {
             //var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
 
             //JSON.stringify(jsongp)
-            console.log(jsongp); 
+            //console.log(jsongp); 
 
         });
         

@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text,StyleSheet } from 'react-native';
 
+import Classificacao from './../../componentes/Classificacao'
+
 export default () => {
 
     return(
-        <View>
-            <Text> Tela Classificação</Text>
-        </View>
+        <Classificacao />
     )
 }
 

@@ -62,11 +62,13 @@ const apostando = (props) =>{
                 style={estilo.inputCasa}
                 onChangeText={onChangeTextCasa}
                 value={textCasa}
+                keyboardType="numeric"
               />
               <TextInput 
                 style={estilo.inputFora}
                 onChangeText={onChangeTextFora}
                 value={textFora}
+                keyboardType="numeric"
               />
             </View>
           <Text style={estilo.vs} > VS</Text>
