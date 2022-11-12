@@ -62,30 +62,21 @@ export default {
     login: (email, password) => {//listar infousu
         let xmls='<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">' +
         '<Body>' +
-        '<ObterInfoUsuarioRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
+        '<ObterInfoUsuarioRQ xmlns="http://soap.webservices/" Usuario=" william.santos@riosoft.com.br" Senha="12345678"/>' +
         '</Body>' +
         '</Envelope>';
-        
-        post(xmls).then(function (resp) {
-            let json = xml2json(resp);
-            let jsongp = json["S:Envelope"]["S:Body"]["ns2:ObterInfoUsuarioRS"]["Grupo"];
-            let jsonusu = json["S:Envelope"]["S:Body"]["ns2:ObterInfoUsuarioRS"]["Usuario"];
 
-            let InfoGrupo = {
-                Codigo: jsongp['Codigo'],
-                Nome: jsongp['Nome'],
-                Imagem: jsongp['UrlImagem'],
-            }
-
-            let InfoUsuario = {
-                Codigo: jsonusu['Codigo'],
-                Nome: jsonusu['Nome'],
-                Email: jsonusu['Email'],
-                Equipe: jsonusu['Equipe'],
-            }
+        return post(xmls).then((resp) => {
+            return new Promise((resolve, reject) => {
+                
+                var json = xml2json(resp); 
+                json = json["S:Envelope"]["S:Body"]["ns2:ObterInfoUsuarioRS"];
+                json = JSON.stringify(json)
+                resolve(json)
 
             //console.log(InfoUsuario, InfoGrupo);
-            
+            return json;
+            })
         });
         
     },
@@ -96,15 +87,15 @@ export default {
         '<ListarPalpitesRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
         '</Body>' +
         '</Envelope>';
-        console.log("Chamou Lista Palpite")
         return post(xmls).then( (resp) =>{
             return new Promise((resolve, reject) => {
                 var json = xml2json(resp);    
-                jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"]
+                jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarPalpitesRS"]["PalpitesJogos"]["Jogo"];
                 jsongp = JSON.stringify(jsongp)
               //  lista = resolve["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
                 resolve(jsongp)
                 
+                console.log(jsongp)
                 return jsongp;
             });
         });
@@ -162,15 +153,21 @@ export default {
         '<ListarClassificacaoRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
         '</Body>' +
         '</Envelope>'
-
-        post(xmls).then(function (resp) {
-            var json = xml2json(resp);
-
-            var jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarClassificacaoRS"]["Posicoes"]["Posicao"];
-
-            JSON.stringify(jsongp)
-            console.log(jsongp); 
-            return jsongp;
+        return post(xmls).then( (resp) =>{
+            return new Promise((resolve, reject) => {
+                console.log('passou 1')
+                console.log(resp)
+                var json = xml2json(resp);    
+                console.log('passou 2')
+                jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarClassificacaoRS"]["Posicoes"]["Posicao"];
+                console.log('passou 3')
+                jsongp = JSON.stringify(jsongp)
+                console.log('passou 4')
+              //  lista = resolve["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
+                resolve(jsongp)
+                
+                return jsongp;
+            });
         });
         
     },

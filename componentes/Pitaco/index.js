@@ -14,7 +14,7 @@ import GALES from './../../assets/bandeiras/Pais_de_Gales_128x128.png';
 
 export default function Pitaco() {
 
-const [ visivel, setVisivel ] = useState(false);
+const [visivel, setVisivel ] = useState(false);
 const [valor, setValor] = useState({});
 
 const [textCasa, onChangeTextCasa] = React.useState("1");
@@ -30,11 +30,7 @@ const [paisFora, setPaisFora] =  React.useState("GALES");
         
       var jsonJogos = JSON.parse(res)
           setValor(jsonJogos);
-          
-          console.log('------PITACO ANTES-----')
-          console.log(valor)
-          console.log('------PITACO DEPOIS-----')
-          //imprimir();
+         
       }
       getBarberInfo();
       
@@ -52,20 +48,19 @@ const [paisFora, setPaisFora] =  React.useState("GALES");
 
   return (
     <View>
-      <Titulo />
 
-    
-      <TouchableOpacity onPress={abreAposta}>
             <FlatList
             data={valor}
             renderItem={({item}) => 
             
             <ScrollView style={estilo.lista}>
+              <TouchableOpacity >
             <ItemListaPitaco placar={item.Codigo} dataInicio={item.DataHora} pais1={item.ImagemTime1} pais2={item.ImagemTime2} imagemTime1={item.ImagemTime1} imagemTime2={item.ImagemTime2} paisCasa="JAPAO" />
+            </TouchableOpacity>
           </ScrollView> 
             }
           />       
-        </TouchableOpacity>
+        
        
         <Modal animationType='slide' transparent={true} visible={visivel} onRequestClose={()=>{}}>
               <View style={estilo.modalWindow}>

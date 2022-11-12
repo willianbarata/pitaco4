@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 
-import { FontAwesome } from '@expo/vector-icons'; 
+import { FontAwesome, FontAwesome5  } from '@expo/vector-icons'; 
 
 import api from '../../services/api';
 
@@ -43,13 +43,59 @@ import URUGUAI    from './../../assets/bandeiras/Uruguai_128x128.png';
 
 export default function ItemListaClassificacao(props) {
   
+  useEffect(() => {
+      
+    var corOuro = "#f6c822"
+    var corPrata = "#c7c5c4"
+    var corBronze = "#945324"
+
+    console.log("---- Tela ITEM LISTA PITACO ----")
+    console.log(props)
+    // console.log(props.imagemTime1)
+    /*  escolherPais1(props.imagemTime1)
+     escolherPais2(props.imagemTime2)
+     Moment.locale();
+     diaSemana(Moment(props.dataInicio).format('dddd'))
+     formatandoData(Moment(props.dataInicio).format('L'))
+     formatandoHora(Moment(props.dataInicio).format('LT'))
+     
+   console.log() */
+
+   }, []);
 
   return (
-    <View style={estilo.container}>
-    <TouchableOpacity >
-        <Text> Teste </Text>
-    </TouchableOpacity>
-  </View>
+    <FlatList
+      data={[
+        {key: 'Devin Devin Devin', posicao: '1'},
+        {key: 'Dan Dominic Dominic' , posicao: '2'},
+        {key: 'Dominic Dominic Dominic', posicao: '3'},
+        {key: 'Jackson Dominic Dominic', posicao: '4'},
+        {key: 'James Dominic', posicao: '5'},
+        {key: 'Joel Dominic', posicao: '6'},
+        {key: 'John Dominic', posicao: '7'},
+        {key: 'Jillian Dominic', posicao: '8'},
+        {key: 'Jimmy Dominic Dominic', posicao: '9'},
+        {key: 'Julie Dominic Dominic', posicao: '10'},
+      ]}
+      renderItem={({item}) => 
+        
+      <TouchableOpacity onPress={()=>{}}>
+        <View style={estilo.Lista}> 
+            <View style={estilo.Direction}>
+                
+                {/* <FontAwesome5 name="medal" size={24} color={'orange'} /> */}
+                
+                <FontAwesome style={estilo.item} name="user" size={24} color="black" />
+                <Text style={estilo.item}> {item.posicao} º - {item.key}</Text>
+                <Text style={estilo.flexa}>  </Text>
+            </View>
+            <Text style={estilo.pontos}>Pontos: 0</Text>
+            
+        </View>
+        
+        </TouchableOpacity>
+    }
+    />
   )
 }
 
@@ -62,16 +108,21 @@ const estilo = StyleSheet.create({
       padding: 10,
       fontSize: 19,
       height: 44,
-      marginLeft: '3%'
+      marginLeft: '7%'
     },
     pontos:{
         fontSize: 15,
         marginTop: -13,
-        marginLeft: '10%'
+        marginLeft: '25%',
+        marginBottom: '2%'
     },
     Lista:{
-        marginLeft: '5%',
-        borderEndColor: 'gray'
+        
+        marginBottom: '1%',
+        marginTop: '1%',
+        borderBottomWidth: 0.2,
+        
+        borderEndColor: '#e6e6e6'
     },
     flexa:{
         textAlign: 'right'

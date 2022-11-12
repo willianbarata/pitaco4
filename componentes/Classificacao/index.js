@@ -1,17 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput,ScrollView } from 'react-native';
 
 import Titulo from '../Titulo';
 import ItemListaClassificacao from '../ItemListaClassificacao';
 
-export default function Tabela() {
+import api from '../../services/api';
+
+export default function Classificacao() {
+
+  const [ valor, setValor ] = useState({})
+
+  useEffect(() => {
+
+    const getBarberInfo = async () => {
+      var lista = "";
+      var email = '';
+      var senha = '';
+      var res = await api.listarclassificacao(email, senha);
+      
+      console.log("---- Tela Classificacao ----")
+      console.log(res)
+         var jsonJogos = JSON.parse(res)
+        setValor(jsonJogos);
+    }
+    getBarberInfo();
+    
+  }, []);
+
 
   return (
-    <ScrollView style={estilo.lista}>
+   
     <ItemListaClassificacao placar="2 x 2" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="JAPAO" />
     
-    
-  </ScrollView> 
+ 
   )
 }
 
