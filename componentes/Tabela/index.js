@@ -21,9 +21,6 @@ export default function Tabela() {
           setValor(jsonJogos);
           
           console.log('-----------')
-          
-         
-         
           console.log(valor)
           //imprimir();
       }

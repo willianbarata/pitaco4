@@ -2,9 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const estilo = StyleSheet.create({
   box:{
-    padding: 10,
-    marginBottom: 10,
-    borderBottomColor: 1,
+    padding: '5%',
     alignItems: 'center'
   },
   placar: {
@@ -19,20 +17,28 @@ const estilo = StyleSheet.create({
     color: 'gray'
   },
   imgPaisCasa:{
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     borderRadius: 30,
-    marginRight: 90
+    marginRight: '35%'
   },
   imgPaisFora:{
-    width: 30,
-    height: 30,
+    width: 35,
+    height: 35,
     borderRadius: 30,
-    marginLeft: 90
+    marginLeft: '35%'
   },
   blocoPlacar:{
     flexDirection: 'row',
-  }
+  },
+  corEnvioPitaco:{
+    color: '#f12128',
+    marginLeft: '5%',
+    fontWeight: 'bold',
+    fontSize: 12
+  },
+ 
+
 });
 
 export default estilo;

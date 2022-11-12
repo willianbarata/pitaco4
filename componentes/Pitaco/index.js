@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
-import { View, ScrollView, Modal, TouchableOpacity, Text, Button, StyleSheet, TextInput , Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, FlatList,ScrollView, Modal, TouchableOpacity, Text, Button, StyleSheet, TextInput , Image } from 'react-native';
 import Titulo from '../Titulo';
-import ItemLista from '../ItemLista';
+import ItemListaPitaco from '../ItemListaPitaco';
 import Aposta from '../Aposta';
 import {Collapse,CollapseHeader, CollapseBody, AccordionList} from 'accordion-collapse-react-native';
+
+import api from '../../services/api';
 
 import estilo from './estilo';
 
@@ -13,6 +15,7 @@ import GALES from './../../assets/bandeiras/Pais_de_Gales_128x128.png';
 export default function Pitaco() {
 
 const [ visivel, setVisivel ] = useState(false);
+const [valor, setValor] = useState({});
 
 const [textCasa, onChangeTextCasa] = React.useState("1");
 const [textFora, onChangeTextFora] = React.useState("1");
@@ -20,24 +23,48 @@ const [textFora, onChangeTextFora] = React.useState("1");
 const [paisCasa, setPaisCasa] =  React.useState("USA");
 const [paisFora, setPaisFora] =  React.useState("GALES");
 
-const apostando = (props) =>{
-  console.log("Apostando")
-  setVisivel(false)
-}
+    useEffect(() => {
+      const getBarberInfo = async () => {
+        var lista = "";
+        var res = await api.listapalpite(lista);
+        
+      var jsonJogos = JSON.parse(res)
+          setValor(jsonJogos);
+          
+          console.log('------PITACO ANTES-----')
+          console.log(valor)
+          console.log('------PITACO DEPOIS-----')
+          //imprimir();
+      }
+      getBarberInfo();
+      
+    }, []);
 
+  const apostando = (props) =>{
+    console.log("Apostando")
+    setVisivel(false)
+  }
 
   const abreAposta = () =>{
     console.log("Abre Aposta")
     setVisivel(true)
   }
+
   return (
     <View>
       <Titulo />
 
-      <ScrollView style={estilo.lista}>
+    
       <TouchableOpacity onPress={abreAposta}>
-        <ItemLista placar="2 x 2" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="JAPAO" />
-       
+            <FlatList
+            data={valor}
+            renderItem={({item}) => 
+            
+            <ScrollView style={estilo.lista}>
+            <ItemListaPitaco placar={item.Codigo} dataInicio={item.DataHora} pais1={item.ImagemTime1} pais2={item.ImagemTime2} imagemTime1={item.ImagemTime1} imagemTime2={item.ImagemTime2} paisCasa="JAPAO" />
+          </ScrollView> 
+            }
+          />       
         </TouchableOpacity>
        
         <Modal animationType='slide' transparent={true} visible={visivel} onRequestClose={()=>{}}>
@@ -109,18 +136,7 @@ const apostando = (props) =>{
               </View>
         </Modal>
 
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="MEXICO"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="SENEGAL"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="PORTUGAL"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="POLONIA"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="HOLANDA"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="ARGENTINA"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="ESPANHA"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="MARROCOS"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="TUNISIA"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="URUGUAI"/>
-        <ItemLista placar="-" dataInicio="19/10, qua às 13:00" paises="Estados Unidos x País de Gales" paisCasa="BRASIL"/>
-      </ScrollView>
+      
 
     
     

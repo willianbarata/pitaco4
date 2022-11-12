@@ -96,14 +96,17 @@ export default {
         '<ListarPalpitesRQ xmlns="http://soap.webservices/" Usuario="william.santos@riosoft.com.br" Senha="12345678"/>' +
         '</Body>' +
         '</Envelope>';
-        
-        post(xmls).then(function (resp) {
-            let json = xml2json(resp);
-
-            let jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarPalpitesRS"]["PalpitesJogos"]["Jogo"];
-            JSON.stringify(jsongp)
-            //console.log(jsongp); //TODO: listados todos os palpites, falta ordenar na tela
-            
+        console.log("Chamou Lista Palpite")
+        return post(xmls).then( (resp) =>{
+            return new Promise((resolve, reject) => {
+                var json = xml2json(resp);    
+                jsongp = json["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"]
+                jsongp = JSON.stringify(jsongp)
+              //  lista = resolve["S:Envelope"]["S:Body"]["ns2:ListarJogosRS"]["Jogos"]["Jogo"];
+                resolve(jsongp)
+                
+                return jsongp;
+            });
         });
         
     },
